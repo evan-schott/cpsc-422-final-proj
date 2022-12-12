@@ -12,3 +12,15 @@ List here the following info:
 2. whether you coded this assignment together, and if not, who worked on which part
 3. brief description of what you have implemented
 4. and anything else you would like us to know
+
+
+Brainstorming:
+1 TQueue per topic, holding all subscribers to that topic
+
+Brainstorming memory allocation:
+- Palloc multiple pages (new function should not be that bad at all)
+- Allocate super pages 
+    - palloc (multiple pages)
+    - edit the page translation system to accomodate super pages (more tedious)
+- free pages
+    - assume this means continuous blocks of pages and super-pages too
