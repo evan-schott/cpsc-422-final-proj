@@ -62,7 +62,7 @@ unsigned int palloc()
     return palloc_free_index;
 }
 
-unsigned int palloc_multi(unsigned int length)
+unsigned int palloc_multi(unsigned int size)
 {
     unsigned int nps;
     unsigned int palloc_index;
@@ -80,7 +80,7 @@ unsigned int palloc_multi(unsigned int length)
             if (count == 0) {
                 palloc_free_index = palloc_index;
             }
-            if (++count == length) {
+            if (++count == size) {
                 found = TRUE;
             }
         }
@@ -92,7 +92,7 @@ unsigned int palloc_multi(unsigned int length)
     }
 
     if (found) {
-        for (count = 0; count < length; count++) {
+        for (count = 0; count < size; count++) {
             at_set_allocated(palloc_free_index + count, 1);
         }
         last_palloc_index = palloc_free_index + count;
