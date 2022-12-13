@@ -24,3 +24,18 @@ Brainstorming memory allocation:
     - edit the page translation system to accomodate super pages (more tedious)
 - free pages
     - assume this means continuous blocks of pages and super-pages too
+
+
+
+
+Evan:
+- We need special function to remove super page. Super pages have no corresponding table,
+
+
+Todo:
+- Add functions to import/export of each folder. (Can wait until finalized)
+
+
+- Brk:
+    - Super page:
+        - Need to supply vaddr that is divisible by 1024 * 4096 = 4MB

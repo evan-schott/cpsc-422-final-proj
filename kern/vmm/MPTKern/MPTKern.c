@@ -85,7 +85,20 @@ unsigned int map_page_multi(unsigned int proc_index, unsigned int vaddr,
 unsigned int map_page_super(unsigned int proc_index, unsigned int vaddr,
                       unsigned int page_index, unsigned int perm) 
 {
-    unsigned int pde_page_index;
+    unsigned int pde_entry = get_pdir_entry_by_va(proc_index, vaddr);
+    unsigned int pde_page_index = pde_entry >> 12;
+    unsigned int curr_vaddr;
+
+    if (pde_entry == 0) {
+        // No need to deal with page tables, just make directory
+        set_pdir_entry_by_va_super(proc_index, vaddr, page_index);
+    }
+    else { 
+        return MagicNumber // Need to assume going in from brk/pagefault or whatever that input vaddr corresponds to pdir entry
+    }
+
+    set_ptbl_entry_by_va_super(proc_index, vaddr, page_index, perm);
+    return pde_page_index;    
 }
 
 /**
@@ -105,6 +118,17 @@ unsigned int unmap_page(unsigned int proc_index, unsigned int vaddr)
     return pte_entry;
 }
 
-//TODO unmap_multipage (prolly dont actually need this)
+// Return void or return value of first segment? 
+void unmap_page_super(unsigned int proc_index, unsigned int vaddr)
+{
+    rmv_pg_entry_by_va_super(proc_index, vaddr);
+    return;
+}
 
-//TODO unmap_superpage
+
+
+
+
+
+
+
