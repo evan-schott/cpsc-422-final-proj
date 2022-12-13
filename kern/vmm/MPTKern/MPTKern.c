@@ -87,7 +87,6 @@ unsigned int map_page_super(unsigned int proc_index, unsigned int vaddr,
 {
     unsigned int pde_entry = get_pdir_entry_by_va(proc_index, vaddr);
     unsigned int pde_page_index = pde_entry >> 12;
-    unsigned int curr_vaddr;
 
     if (pde_entry == 0) {
         // No need to deal with page tables, just make directory
@@ -96,8 +95,8 @@ unsigned int map_page_super(unsigned int proc_index, unsigned int vaddr,
     else { 
         return MagicNumber // Need to assume going in from brk/pagefault or whatever that input vaddr corresponds to pdir entry
     }
-
-    set_ptbl_entry_by_va_super(proc_index, vaddr, page_index, perm);
+    // This shouldn't be necessary actually
+    // set_ptbl_entry_by_va_super(proc_index, vaddr, page_index, perm);
     return pde_page_index;    
 }
 
